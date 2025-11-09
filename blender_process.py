@@ -6,7 +6,7 @@ import os
 # 功能开关
 auto_detect_frame_range = True   # 自动检测帧范围 (True/False)
 override_render_settings = False  # 是否使用自定义设置覆盖原本设置，False为使用blender文件原本设置
-enable_compositing_setup = True  # 是否启用自定义合成节点设置 (True/False)
+enable_compositing_setup = True  # 是否启用合成节点设置 (True/False)
 
 # 输出路径设置
 base_output_path = "E:\\Code\\Blender_output" # 基础输出目录
@@ -252,8 +252,8 @@ if camera_obj:
     print(" - 已为焦距创建关键帧。")
 
     # 设置动画插值为线性
-    if camera_data.animation_data and camera_data.animation_data.action:
-        fcurve = camera_data.animation_data.action.fcurves.find("lens")
+    if camera_data.animation_data and camera_data.animation_data.action: #检查摄像机是否有动画数据对象和检查是否有具体的动画动作（Action）
+        fcurve = camera_data.animation_data.action.fcurves.find("lens") # 查找焦距属性的动画曲线，存在才进行设置
         if fcurve:
             for keyframe_point in fcurve.keyframe_points:
                 keyframe_point.interpolation = 'LINEAR'
